@@ -4,6 +4,7 @@ const createError = require('http-errors')
 const xss = require('xss-clean')
 const rateLimit = require('express-rate-limit');
 const userRouter = require('./src/routers/userRouter');
+const connectdb = require('./src/config/db');
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(morgan('dev')); // show api method and time
 app.use(xss());
 app.use(rateLimiter); // rateLimiter is set limitation of API calling.
 
+connectdb();
 
 // User Router  
 app.use(userRouter);
