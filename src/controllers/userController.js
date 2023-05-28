@@ -5,7 +5,7 @@ const getUser = (req, res, next) => {
     try {
         res.status(200).send({
             message: 'User API is working.',
-            users
+            
         })
     } catch (error) {
         next(error)

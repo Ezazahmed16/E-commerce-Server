@@ -5,6 +5,7 @@ const xss = require('xss-clean')
 const rateLimit = require('express-rate-limit');
 const userRouter = require('./src/routers/userRouter');
 const connectdb = require('./src/config/db');
+const seedRouter = require('./src/routers/seedRouter');
 
 const app = express();
 
@@ -25,8 +26,6 @@ app.use(rateLimiter); // rateLimiter is set limitation of API calling.
 
 connectdb();
 
-// User Router  
-app.use(userRouter);
 
 
 // Define routes
@@ -35,6 +34,12 @@ app.get('/', (req, res) => {
     message: 'API is working Fine.'
   })
 });
+
+// User Router  
+app.use('/api/users', userRouter);
+// seed Router  
+app.use('/api/seed', seedRouter);
+
 
 //clint error handeling 
 app.use((req, res, next) => {
